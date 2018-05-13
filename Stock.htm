@@ -115,7 +115,7 @@
 			
 			var up = currentValue >= openValue;
 			
-			var change = (up ? "+" : "-") + (currentValue - openValue).toFixed(2) + " (" + ((currentValue - openValue) / openValue * 100).toFixed(2) + "%)"; 
+			var change = (up ? "+" : "") + (currentValue - openValue).toFixed(2) + " (" + ((currentValue - openValue) / openValue * 100).toFixed(2) + "%)"; 
 			var changeElm = document.getElementById("change");
 			changeElm.className = up ? "up" : "down";
 			
@@ -124,7 +124,8 @@
 			$scope.date   = document.getElementById("date").textContent  = qoute.sampleDate;
 		} // updateUI
 
-		var timer = setInterval(() => {	$scope.getSymbolQuote("VRNS"); }, (60 * 1000)); // One minute interval.		
+		var timer1 = setTimeout(()  => { $scope.getSymbolQuote("VRNS"); }, 0); // Start immediately.	
+		var timer2 = setInterval(() => { $scope.getSymbolQuote("VRNS"); }, (60 * 1000)); // One minute interval.	
 	});
 	
 </script>
