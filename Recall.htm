@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<title> VRNS Product Recall Widget</title>
+<style>
+
+/*Tile*/
+body {
+	font-family: "Segoe UI VSS (Regular)","-apple-system",BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Ubuntu,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+	font-size: 12px;
+	color: black;
+}
+
+.countdown {
+	padding: 14px;
+}
+
+.container {
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+}
+
+.title {
+	margin-top: -5px;
+	margin-bottom: 5px;
+	font-size: 16px;
+	min-height: 21px;
+}
+
+.header {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-wrap: normal;
+	white-space: nowrap;
+}
+
+.countdown-number {
+	margin: 10px 0 10px 0;
+	/*font-size: 72px;*/
+	font-weight: 300;
+	line-height: 72px;
+}
+
+</style>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="	crossorigin="anonymous"></script>
+<script type="text/javascript">
+	"use strict";
+	
+	//-----------------------------------------------------------------------------------------------
+	// - Constants.
+	var lastRecallTime = new Date("2018-03-18");
+	var daysPassed = daysDiff((new Date()), lastRecallTime);	
+	
+	// - Util functions.
+	function Time(){ return Math.floor((new Date().getTime() - startTime) / 1000); }
+	function Log(text){ console.log( "[" + Time() + "]: " + text); };
+	
+	function daysDiff(d1,d2)
+	{
+		var nDays;
+		var tv1 = d1.valueOf();  // msec since 1970
+		var tv2 = d2.valueOf();
+
+		nDays = (tv1 - tv2) / 1000 / 86400;
+		nDays = Math.round(nDays - 0.5);
+		return nDays;
+	} // daysDiff
+	
+	function getColorTheme(daysPassed)
+	{
+		return daysPassed <= 10 ? "#D71538" : daysPassed <= 30 ? "#FFC552" : "#30F07C";
+	} // getColorTheme
+	
+	function getCountNumberFontSize(daysPassed)
+	{
+		return daysPassed < 100 ? "72px" : daysPassed <= 1000 ? "56px" : "32px";
+	} // getCountNumberFontSize
+	
+</script>
+</head>
+	<body class="countdown">
+    <div class="container">
+        <div class="title header">Last recall</div>
+        <div id="countdown-container" class="countdown-number header"></div>
+        <div id="countdown-bottom-container">days ago</div>
+    </div>
+    <div class="container">
+        <div id="error-container" class="error-text"></div>
+    </div>
+</body>
+
+<script>
+	$(document).ready(function(){
+    $("#countdown-container").text( daysPassed + "");
+		$("#countdown-container").css('font-size', getCountNumberFontSize(daysPassed));
+		$("body").css('background-color', getColorTheme(daysPassed));
+	});
+	
+</script>
+</body>
+</html>
