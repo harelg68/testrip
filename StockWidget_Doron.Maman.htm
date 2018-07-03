@@ -1,0 +1,50 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<body>
+
+<script>
+var stockQuoteURL = "https://www.alphavantage.co/";
+var apiKey = "BUCAQ9RJZL6I9X12";
+var symbole = "VRNS";
+var Newdata=[];
+var NewDate2=[];
+var high=0;
+var newhigh=0;
+var datenow="";
+var newDatanow=""
+
+$(document).ready(function(){
+    $("button").click(function(){
+        $.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=VRNS&interval=1min&apikey=BUCAQ9RJZL6I9X12", function(data, status){
+            
+			this.Newdata=data;
+			console.log(this.Newdata );
+			datenow=Object.keys(this.Newdata["Time Series (1min)"])[0];
+			high=this.Newdata["Time Series (1min)"][datenow]["1. open"];
+			console.log(high);
+			 document.getElementById("number").innerHTML = high;
+        });
+		    $.get("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=VRNS&outputsize=full&apikey=BUCAQ9RJZL6I9X12", function(data1, status){
+            
+			this.Newdata2=data1;
+			console.log(this.Newdata2 );
+			newDatanow=Object.keys(this.Newdata2["Time Series (Daily)"])[0];
+			newhigh=this.Newdata2["Time Series (Daily)"][newDatanow]["1. open"];
+			newhigh=high-newhigh;
+			console.log(newhigh);
+			document.getElementById("number2").innerHTML = newhigh;
+			
+        });
+    });
+	
+});
+
+alert(stockQuoteURL);
+
+</script>
+<h1>NASDAQ : VARNS</h1>
+<div id="number"> </div>
+<div id="number2"></div>
+<button>Send an HTTP GET request to a page and get the result back</button>
+</body>
+</html>
