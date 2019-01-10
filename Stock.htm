@@ -73,8 +73,8 @@
 		//-----------------------------------------------------------------------------------------------
 		$scope.getSymbolQuote = function(symbol)	{
 			
-			var realTimeQuoteURL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=__SYMBOL__&interval=1min&apikey=BUCAQ9RJZL6I9X12".replace(symbolVerb,symbol);
-			var dailyQuoteURL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=__SYMBOL__&apikey=BUCAQ9RJZL6I9X12".replace(symbolVerb,symbol);
+			var realTimeQuoteURL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=__SYMBOL__&interval=1min&apikey=TH9AUYPP2604JNQK".replace(symbolVerb,symbol);
+			var dailyQuoteURL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=__SYMBOL__&apikey=TH9AUYPP2604JNQK".replace(symbolVerb,symbol);
 		
 			var realTimeQuote, dailyQuote;
 			httpGet(realTimeQuoteURL)
